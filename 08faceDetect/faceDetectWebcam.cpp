@@ -14,8 +14,8 @@ using namespace cv;
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-  string path = "/home/herman/workspace/openCV_projects/resources/a2.jpg";
-  Mat img = imread(path);
+  VideoCapture cap(0);
+  Mat img;
 
   CascadeClassifier faceCascade;
   faceCascade.load("/home/herman/workspace/openCV_projects/resources/"
@@ -25,15 +25,23 @@ int main(int argc, char *argv[]) {
     cout << "xml file did not load" << endl;
     exit(0);
   }
-
   vector<Rect> faces;
-  faceCascade.detectMultiScale(img, faces, 1.16, 10);
 
-  for (int i = 0; i < faces.size(); i++) {
-    rectangle(img, faces[i].tl(), faces[i].br(), Scalar(255, 0, 255), 2);
+  while (true) {
+    cap.read(img);
+
+    faceCascade.detectMultiScale(img, faces, 1.05, 10);
+
+    for (int i = 0; i < faces.size(); i++) {
+      rectangle(img, faces[i].tl(), faces[i].br(), Scalar(255, 0, 255), 2);
+    }
+
+    imshow("WebCam video", img);
+    waitKey(10);
   }
 
   imshow("image", img);
   waitKey(0);
+
   return 0;
 }
