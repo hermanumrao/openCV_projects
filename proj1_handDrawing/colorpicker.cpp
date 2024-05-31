@@ -49,7 +49,7 @@ using namespace cv;
 using namespace std;
 
 int main() {
-  VideoCapture cap(2);
+  VideoCapture cap(0);
   Mat img;
   Mat imgHSV, mask;
   int hmin = 0, smin = 0, vmin = 0;
