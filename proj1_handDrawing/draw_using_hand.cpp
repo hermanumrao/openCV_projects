@@ -78,8 +78,9 @@ void drawOnCanvas(vector<vector<int>> newpoints, vector<Scalar> myColorValues) {
 }
 
 int main(int argc, char *argv[]) {
-  VideoCapture cap(0);
-
+  VideoCapture cap(2);
+  cap.set(CAP_PROP_FRAME_WIDTH, 640); // set resolution for camera
+  cap.set(CAP_PROP_FRAME_HEIGHT, 480);
   while (true) {
 
     cap.read(img);
